@@ -10,6 +10,18 @@ RUN apt install mariadb-server -y
 # RUN usermod -d /var/lib/mysql/ mysql
 # RUN service mariadb start
 
-CMD mysqld_safe && tail -f /dev/null
+WORKDIR /etc
 
-# RUN service mariadb restart
+COPY ./tools/init.sh ./
+
+ARG db_name=wp_base
+ARG username=root
+ARG password=wp_secret_12345
+
+RUN bash init.sh
+
+# CMD mysqld_safe && tail -f /dev/null
+
+EXPOSE 3306
+
+ENTRYPOINT [ "mysqld" ]
