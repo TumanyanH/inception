@@ -10,13 +10,15 @@ services:
     container_name: nginx
     ports:
       - 443:443
-    networks: def-net
+    networks:
+      - def-net
   mariadb:
     build: ./maria
     container_name: mariadb
     ports:
       - 3306:3306
-    networks: def-net
+    networks:
+      - def-net
   wordpress:
     build: ./wp
     container_name: wordpress
@@ -24,4 +26,5 @@ services:
       - mariadb
     ports: 
       - 9000:9000
-    networks: def-net
+    networks:
+      - def-net
