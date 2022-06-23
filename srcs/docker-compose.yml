@@ -12,6 +12,7 @@ services:
       - 443:443
     networks:
       - def-net
+    restart: always
   mariadb:
     build: ./maria
     container_name: mariadb
@@ -19,6 +20,7 @@ services:
       - 3306:3306
     networks:
       - def-net
+    restart: always
   wordpress:
     build: ./wp
     container_name: wordpress
@@ -28,3 +30,4 @@ services:
       - 9000:9000
     networks:
       - def-net
+    restart: always
