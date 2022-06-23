@@ -8,10 +8,10 @@ services:
   nginx:
     build: ./nginx
     container_name: nginx
-    ports:
-      - 443:443
-    networks:
-      - def-net
+    # ports:
+    #   - 443:443
+    # networks:
+    #   - def-net
     restart: always
   mariadb:
     build: ./maria
