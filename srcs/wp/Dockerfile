@@ -11,3 +11,5 @@ RUN tar xfz latest.tar.gz && mv wordpress/* ./
 COPY ./conf/wp-config.php ./wp-config.php
 
 RUN chown -R www-data:www-data /var/www/html/wordpress
+
+CMD service php7.3-fpm start
