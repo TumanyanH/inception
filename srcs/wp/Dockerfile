@@ -8,5 +8,6 @@ WORKDIR /var/www/html
 RUN wget http://wordpress.org/latest.tar.gz
 RUN tar xfz latest.tar.gz && mv wordpress/* ./
 
-RUN service php-fpm restart
+COPY ./conf/wp-config.php ./wp-config.php
 
+RUN chown -R www-data:www-data /var/www/html/wordpress
