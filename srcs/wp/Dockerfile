@@ -16,6 +16,7 @@ RUN wget http://wordpress.org/latest.tar.gz
 RUN tar xfz latest.tar.gz && mv wordpress/* ./
 
 COPY ./conf/wp-config.php ./wp-config.php
+COPY ./conf/wp-config.php /var/www/wp-config.php
 
 
 

@@ -5,30 +5,14 @@ networks:
     name: def-net
     driver: bridge
 
-volumes:
-  wp:
-    driver: local
-    name: wp
-    driver_opts:
-      type: none
-      o: bind
-      device: ./wordpress
-  db:
-    driver: local
-    name: db
-    driver_opts:
-      type: none
-      o: bind
-      device: ./mariadb
-
 services:
   mariadb:
     build: ./maria
     container_name: mariadb
-    # volumes:
-    #   - db:/var/lib/mysql
     networks:
       - def-net
+    expose:
+      - "3306"
     restart: unless-stopped
 
   wordpress:
@@ -36,10 +20,14 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
+    # ports: 
+    #   - 9000:9000
     volumes:
-      - wp:/var/www/html
+      - ./wordpress:/var/www/html
     networks:
       - def-net
+    # links:
+    #   - mariadb:mysql
     restart: unless-stopped
 
   nginx:
@@ -52,5 +40,5 @@ services:
     networks:
       - def-net
     volumes:
-      - wp:/var/www/html
+      - ./wordpress:/var/www/html
     restart: unless-stopped
