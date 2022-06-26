@@ -8,25 +8,25 @@ networks:
 volumes:
   wp:
     driver: local
-    name: wp
+    # name: wp
     driver_opts:
       type: none
       o: bind
-      device: /home/hakob/data/wordpress
+      device: ./wordpress
   db:
     driver: local
-    name: db
+    # name: db
     driver_opts:
       type: none
       o: bind
-      device: /home/hakob/data/mariadb
+      device: ./mariadb
 
 services:
   mariadb:
     build: ./maria
     container_name: mariadb
-    volumes:
-      - db:/var/lib/mysql
+    # volumes:
+    #   - db:/var/lib/mysql
     networks:
       - def-net
     restart: unless-stopped
@@ -36,8 +36,6 @@ services:
     container_name: wordpress
     depends_on:
       - mariadb
-    # ports: 
-    #   - 9000:9000
     volumes:
       - wp:/var/www/html
     networks:
