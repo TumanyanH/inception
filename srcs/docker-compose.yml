@@ -2,20 +2,20 @@ version: '3'
 
 networks:
   def-net:
-    # name: def-net
+    name: def-net
     driver: bridge
 
 volumes:
   wp:
     driver: local
-    # name: wp
+    name: wp
     driver_opts:
       type: none
       o: bind
       device: ./wordpress
   db:
     driver: local
-    # name: db
+    name: db
     driver_opts:
       type: none
       o: bind
