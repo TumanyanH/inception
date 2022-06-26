@@ -2,32 +2,57 @@ version: '3'
 
 networks:
   def-net:
+    name: def-net
     driver: bridge
 
+volumes:
+  wp:
+    driver: local
+    name: wp
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hakob/data/wordpress
+  db:
+    driver: local
+    name: db
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/hakob/data/mariadb
+
 services:
-  nginx:
-    build: ./nginx
-    container_name: nginx
-    ports:
-      - 443:443
-    networks:
-      - def-net
-    restart: always
   mariadb:
     build: ./maria
     container_name: mariadb
-    ports:
-      - 3306:3306
+    volumes:
+      - db:/var/lib/mysql
     networks:
       - def-net
-    restart: always
+    restart: unless-stopped
+
   wordpress:
     build: ./wp
     container_name: wordpress
     depends_on:
       - mariadb
-    ports: 
-      - 9000:9000
+    # ports: 
+    #   - 9000:9000
+    volumes:
+      - wp:/var/www/html
     networks:
       - def-net
-    restart: always
+    restart: unless-stopped
+
+  nginx:
+    build: ./nginx
+    container_name: nginx
+    depends_on:
+      - wordpress
+    ports:
+      - 443:443
+    networks:
+      - def-net
+    volumes:
+      - wp:/var/www/html
+    restart: unless-stopped
