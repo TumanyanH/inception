@@ -12,11 +12,11 @@ services:
     build: ./maria
     container_name: mariadb
     volumes: 
-      - /home/hakob/data/mariadb
+      - /home/hakob/data/mariadb:/var/lib/mysql
     networks:
       - def-net
-    expose:
-      - "3306"
+    # expose:
+    #   - "3306"
     restart: unless-stopped
 
   wordpress:
