@@ -11,8 +11,8 @@ services:
   mariadb:
     build: ./maria
     container_name: mariadb
-    volumes: 
-      - /home/hakob/data/mariadb:/var/lib/mysql
+    # volumes: 
+    #   - /home/hakob/data/mariadb:/var/lib/mysql
     networks:
       - def-net
     # expose:
