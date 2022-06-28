@@ -4,3 +4,5 @@ echo "FLUSH PRIVILEGES;" >> import.sql
 
 /etc/init.d/mysql start
 mysql < import.sql
+
+sed -i 's/bind-address = 127.0.0.1/bind-address = 0.0.0.0/' /etc/mysql/my.cnf
