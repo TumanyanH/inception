@@ -1,5 +1,5 @@
-echo "CREATE DATABASE $db_name;" > import.sql
-echo "GRANT ALL PRIVILEGES on $db_name.* TO '$username'@'localhost' IDENTIFIED BY '$password';" >> import.sql
+echo "CREATE DATABASE wp_base;" > import.sql
+echo "GRANT ALL PRIVILEGES on wp_base.* TO 'root'@'localhost' IDENTIFIED BY 'wp_admin_12345';" >> import.sql
 echo "FLUSH PRIVILEGES;" >> import.sql
 
 /etc/init.d/mysql start
