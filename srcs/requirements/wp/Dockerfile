@@ -18,8 +18,6 @@ RUN tar xfz latest.tar.gz && mv wordpress/* ./
 COPY ./conf/wp-config.php ./wp-config.php
 COPY ./conf/wp-config.php /var/www/wp-config.php
 
-
-
 # RUN sed -i "s/\/run\/php\/php7.3-fpm.sock/0.0.0.0:9000/g" /etc/php/7.3/fpm/pool.d/www.conf && \
 # 	mkdir -p /run/php
 

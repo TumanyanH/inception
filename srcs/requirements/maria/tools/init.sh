@@ -37,10 +37,10 @@ DELETE FROM	mysql.user WHERE User='';
 DROP DATABASE test;
 DELETE FROM mysql.db WHERE Db='test';
 DELETE FROM mysql.user WHERE User='root' AND Host NOT IN ('localhost', '127.0.0.1', '::1');
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'wp_secret_12345';
+ALTER USER 'root'@'$HOSTNAME' IDENTIFIED BY '$WP_ADMIN_PASSWORD';
 CREATE DATABASE wp_base CHARACTER SET utf8 COLLATE utf8_general_ci;
-CREATE USER 'wp_user'@'%' IDENTIFIED by 'wp_secret_12345';
-GRANT ALL PRIVILEGES ON wp_base.* TO 'wp_user'@'%';
+CREATE USER '$WP_USER'@'%' IDENTIFIED by '$WP_USER_PASSWORD';
+GRANT ALL PRIVILEGES ON wp_base.* TO '$WP_USER'@'%';
 FLUSH PRIVILEGES;
 EOF
 	# run init.sql

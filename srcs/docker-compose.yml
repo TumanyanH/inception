@@ -2,7 +2,6 @@ version: '3'
 
 networks:
   def-net:
-    # name: def-net
     driver: bridge
 
 volumes:
@@ -16,33 +15,29 @@ volumes:
 
 services:
   mariadb:
-    build: ./maria
+    build: ./requirements/maria
     container_name: mariadb
     # volumes: 
     #   - db:/var/lib/mysql
     networks:
       - def-net
-    # expose:
-    #   - "3306"
+    env_file:
+      - .env
     restart: unless-stopped
-
   wordpress:
-    build: ./wp
+    build: ./requirements/wp
     container_name: wordpress
     depends_on:
       - mariadb
-    # ports: 
-    #   - 9000:9000
     volumes:
       - ./wordpress:/var/www/html
     networks:
       - def-net
-    # links:
-    #   - mariadb:mysql
+    env_file:
+      - .env
     restart: unless-stopped
-
   nginx:
-    build: ./nginx
+    build: ./requirements/nginx
     container_name: nginx
     depends_on:
       - wordpress
