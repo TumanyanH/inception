@@ -1,7 +1,7 @@
 FROM debian:buster
 
 RUN apt-get update
-RUN apt install wget php7.3 php-mysql php-fpm -y
+RUN apt install wget php7.3 php-mysql php-fpm curl -y
 
 EXPOSE 9000
 
@@ -26,9 +26,17 @@ COPY ./conf/wp-config.php /var/www/wp-config.php
 # CMD if [ ! -d "/var/www/wordpress" ];then chown -R www-data:www-data /var/www/html;fi \
 # 	&& php-fpm7.3 -F
 
+# RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
+# RUN php wp-cli.phar --info
+
+# RUN chmod +x wp-cli.phar
+
+# RUN mv wp-cli.phar /usr/local/bin/wp
 
 RUN chown -R www-data:www-data /var/www/html
+
+# RUN sleep 10; wp core install --url="http://localhost" --title="Sample Title" --admin_name=admin --admin_password=admin --admin_email=you@domain.com 
 
 ENTRYPOINT [ "/var/www/starter.sh" ]
 

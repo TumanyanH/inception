@@ -16,8 +16,8 @@ if [ ! -f /var/www/html/wp-config.php ]; then
 	wp core download --allow-root;
 	mv /var/www/wp-config.php /var/www/html/
 	echo "Wordpress: creating users..."
-	wp core install --allow-root --url=${WP_URL} --title=${WP_TITLE} --admin_user=${WP_ADMIN_LOGIN} --admin_password=${WP_ADMIN_PASSWORD} --admin_email=${WP_ADMIN_EMAIL}
-	wp user create --allow-root ${WP_USER_LOGIN} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASSWORD};
+	wp core install --allow-root --url="https://localhost" --title="first site" --admin_user="admin" --admin_password="wp_secret_12345" --admin_email=hakobtumanyan7@gmail.com
+	wp user create --allow-root "coeditor" "samplemil@mail.ru" --user_pass="somerandomletters";
 	echo "Wordpress: set up!"
 fi
 

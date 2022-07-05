@@ -1,7 +1,8 @@
-FROM debian:buster
+FROM alpine:3.13
 
-RUN apt update
-RUN apt install mariadb-server -y
+RUN	apk update && apk upgrade && apk add --no-cache \
+        mariadb \
+        mariadb-client
 
 WORKDIR /etc
 
@@ -11,10 +12,13 @@ ARG db_name=wp_base
 ARG username=root
 ARG password=wp_secret_12345
 
-RUN bash init.sh
+# RUN bash init.sh
 
 # CMD mysqld_safe && tail -f /dev/null
 
 EXPOSE 3306
 
-ENTRYPOINT [ "mysqld" ]
+# ENTRYPOINT [ "service", "mysql", "start" ]
+# ENTRYPOINT [ "mysqld" ]
+ENTRYPOINT [ "sh", "init.sh" ]
+# CMD "service mariadb start"

@@ -5,14 +5,21 @@ networks:
     # name: def-net
     driver: bridge
 
-
+volumes:
+  db:
+    driver: local
+    name: db
+    driver_opts:
+      type: none
+      o: bind
+      device: ./mariadb
 
 services:
   mariadb:
     build: ./maria
     container_name: mariadb
     # volumes: 
-    #   - /home/hakob/data/mariadb:/var/lib/mysql
+    #   - db:/var/lib/mysql
     networks:
       - def-net
     # expose:
@@ -27,7 +34,7 @@ services:
     # ports: 
     #   - 9000:9000
     volumes:
-      - /home/hakob/data/wordpress:/var/www/html
+      - ./wordpress:/var/www/html
     networks:
       - def-net
     # links:
@@ -44,5 +51,5 @@ services:
     networks:
       - def-net
     volumes:
-      - /home/hakob/data/wordpress:/var/www/html
+      - ./wordpress:/var/www/html
     restart: unless-stopped
