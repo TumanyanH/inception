@@ -13,8 +13,8 @@ prune: clean
 	@ docker system prune -f
 
 start:
-	@ mkdir /home/hakob/data/mariadb
-	@ mkdir /home/hakob/data/wordpress
+	@ mkdir -p /home/hakob/data/mariadb
+	@ mkdir -p /home/hakob/data/wordpress
 	@ echo "127.0.0.1 htumanya.42.fr" >> /etc/hosts
 	@ mkdir ./srcs/mariadb
 	@ mkdir ./srcs/wordpress
