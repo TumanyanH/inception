@@ -13,7 +13,7 @@ prune: clean
 	@ docker system prune -f
 
 start:
-	# @ echo "127.0.0.1 htumanya.42.fr" >> /etc/hosts
+	@ echo "127.0.0.1 htumanya.42.fr" >> /etc/hosts
 	@ mkdir ./srcs/mariadb
 	@ mkdir ./srcs/wordpress
 	@ docker-compose -f srcs/docker-compose.yml up --build
