@@ -7,7 +7,7 @@ networks:
 volumes:
   db:
     driver: local
-    name: db
+    # name: db
     driver_opts:
       type: none
       o: bind
