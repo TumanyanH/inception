@@ -11,14 +11,14 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: ./mariadb
+      device: /home/hakob/data/mariadb
 
 services:
   mariadb:
     build: ./requirements/maria
     container_name: mariadb
-    # volumes: 
-    #   - db:/var/lib/mysql
+    volumes: 
+      - db:/var/lib/mysql
     networks:
       - def-net
     env_file:
@@ -30,7 +30,7 @@ services:
     depends_on:
       - mariadb
     volumes:
-      - ./wordpress:/var/www/html
+      - /home/hakob/data/wordpress:/var/www/html
     networks:
       - def-net
     env_file:
@@ -46,5 +46,5 @@ services:
     networks:
       - def-net
     volumes:
-      - ./wordpress:/var/www/html
+      - /home/hakob/data/wordpress:/var/www/html
     restart: unless-stopped
